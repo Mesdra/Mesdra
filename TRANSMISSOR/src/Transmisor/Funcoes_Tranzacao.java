@@ -49,10 +49,11 @@ public class Funcoes_Tranzacao {
 		String dados2 = new String(); 
 		String flag = "01111110";
 		
-		 dados = dados.concat(flag);
+		
 		 
 		 for(int i = 0 ;i < lista.size();i++ ){
-		dados2 = lista.get(i).concat(flag);	 
+	    dados2 = flag.concat(lista.get(i));
+		dados2 = dados2.concat(flag);	 
 		dados = dados.concat(dados2);	 
 		 }
 		

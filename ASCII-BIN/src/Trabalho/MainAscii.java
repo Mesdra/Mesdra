@@ -5,7 +5,7 @@ import java.util.List;
 import Trabalho.Ler_Gravar_arquivo;
 
 
-public class Main {
+public class MainAscii {
 
 	public static void main(String[] args) {
 		

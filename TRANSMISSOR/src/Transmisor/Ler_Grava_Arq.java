@@ -11,17 +11,16 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 public class Ler_Grava_Arq {
 	public Ler_Grava_Arq() {
 		super();
-		
+
 	}
 
-	List<String> lerArquivo(){
+	List<String> lerArquivo() {
 		List<String> lista = new ArrayList<String>();
 		File arquivo = escolherArquivo();
-		
+
 		try {
 			Scanner sc = new Scanner(arquivo);
 			while (sc.hasNext()) {
@@ -32,27 +31,24 @@ public class Ler_Grava_Arq {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		return lista;
 	}
-	
-	public void salvarFrameArquivo(List<String> lista) {
+
+	public void salvarFrameArquivo(String dados) {
 
 		File arquivo = escolherArquivo();
 		try {
 			FileWriter fw = new FileWriter(arquivo);
-			for (int i=0;i<lista.size();i++) {
-				fw.append(lista.get(i));
-				 fw.append("\n");
-			}
+			fw.append(dados);
+			fw.append("\n");
+
 			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public File escolherArquivo() {
 		JFileChooser fc = new JFileChooser();
 		fc.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -65,5 +61,5 @@ public class Ler_Grava_Arq {
 		}
 		return null;
 	}
-	
+
 }
