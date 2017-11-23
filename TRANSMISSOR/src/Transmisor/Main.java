@@ -18,6 +18,8 @@ public class Main {
 			String dadoCheckSum = gerarCheckSum(lista.get(i));
 			String Dado_Check = lista.get(i).concat(dadoCheckSum);
 			lista2.add(Dado_Check);
+			System.out.println(lista.get(i));
+			System.out.println(dadoCheckSum);
 	
 
 		}
@@ -33,8 +35,8 @@ public class Main {
 	}
 
 	static String gerarCheckSum(String dado) {
-		String string = "000000";
-		String polinomio = "1001001";
+		String string = "00000";
+		String polinomio = "110010";
 
 		dado = dado.concat(string);
 
@@ -57,10 +59,10 @@ public class Main {
 			} else {
 				dados[contDados] = '0';
 			}
-			if (contGerador == 6) {
+			if (contGerador == 5) {
 				contGerador = -1;
 				condicaoParada = false;
-				for (int j = 0; j < dados.length - 6; j++) {
+				for (int j = 0; j < dados.length - 5; j++) {
 					if (dados[j] == '1') {
 						j--;
 						contDados = j;
@@ -77,7 +79,7 @@ public class Main {
 		}
 		
 		String resposta = new String(dados);
-		String checkSum = resposta.substring(resposta.length()-6, resposta.length());
+		String checkSum = resposta.substring(resposta.length()-5, resposta.length());
 		
 		return checkSum;
 	}

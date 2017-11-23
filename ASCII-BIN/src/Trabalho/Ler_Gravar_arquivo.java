@@ -30,7 +30,7 @@ public class Ler_Gravar_arquivo {
 				texto = texto.concat(" ");
 			}
 			sc.close();
-			int contador = 4;
+			int contador = 5;
 			int contador2 = 0;
 			int totalCaracteres = texto.length();
 			
