@@ -13,7 +13,7 @@ public class Funcoes_Tranzacao {
 		for(int i = 0; i < listaDados.size();i++){
 			String dado = listaDados.get(i);
 			int cont = 0;
-			StringBuilder stringBuilder = new StringBuilder(dado);
+			//StringBuilder stringBuilder = new StringBuilder(dado);
 			for(int j=0;j < dado.length();j++ ){
 				if(dado.charAt(j) == '1'){
 					cont++;
@@ -23,6 +23,7 @@ public class Funcoes_Tranzacao {
 				if(cont == 5){
 					cont = 0;
 					j++;
+					StringBuilder stringBuilder = new StringBuilder(dado);
 					//System.out.println(stringBuilder.length());
 				    dado = stringBuilder.insert(j, '0').toString();
 					//System.out.println(stringBuilder.length());

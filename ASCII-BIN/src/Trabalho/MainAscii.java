@@ -38,14 +38,5 @@ public class MainAscii {
 		return binary.toString();
 	}
 	
-	public static String BinaryToAsc(String input) {
-		String output = "";
-		for (int i = 0; i <= input.length() - 8; i += 8) {
-			int k = Integer.parseInt(input.substring(i, i + 8), 2);
-			output += (char) k;
-		}
-
-		return output;
-	}
-
+	
 }

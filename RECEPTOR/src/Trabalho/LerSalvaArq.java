@@ -34,13 +34,19 @@ public class LerSalvaArq {
 		return dados;
 	}
 
-	public void salvarFrameArquivo(String dados) {
+	public void salvarFrameArquivo(List<String> listaAsctoBin) {
 
 		File arquivo = escolherArquivo();
 		try {
+			String dado = new String();
+			String texto = new String();
 			FileWriter fw = new FileWriter(arquivo);
-			fw.append(dados);
-			fw.append("\n");
+			for (int i = 0; i < listaAsctoBin.size(); i++) {
+				dado = listaAsctoBin.get(i);
+				dado = BinaryToAsc(dado);
+				texto = texto.concat(dado);
+			}
+			fw.append(texto);
 
 			fw.close();
 		} catch (IOException e) {
@@ -59,6 +65,42 @@ public class LerSalvaArq {
 			return fc.getSelectedFile();
 		}
 		return null;
+	}
+
+	public static String BinaryToAsc(String input) {
+		String output = "";
+		for (int i = 0; i <= input.length() - 8; i += 8) {
+			int k = Integer.parseInt(input.substring(i, i + 8), 2);
+			output += (char) k;
+		}
+
+		return output;
+	}
+
+	public void salvaFrameSaida(List<String> listaSaida) {
+		File arquivo = escolherArquivo();
+		try {
+			FileWriter fw = new FileWriter(arquivo);
+			for (int i = 0; i < listaSaida.size(); i++) {
+				String dado = listaSaida.get(i);
+				String verificador = dado.substring(dado.length() - 5, dado.length());
+				dado = dado.substring(0, dado.length() - 5);
+				String check = dado.substring(dado.length() - 5, dado.length());
+				if (verificador.equals("00000")) {
+					dado = dado.substring(0, dado.length() - 5);
+					dado = dado.concat("  CheckSum " + check + "(OK)");
+				} else {
+					dado = dado.concat("  (ERRO)");
+				}
+				fw.append(dado);
+				fw.append("\n");
+			}
+
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
