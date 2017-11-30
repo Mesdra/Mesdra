@@ -29,7 +29,9 @@ public class MainRecep {
 		List<String> listaSaida = new ArrayList<>();
 		List<String> listaAsctoBin = new ArrayList<>();
 		
-		for (int i = 1; i < listDados.size(); i++){
+		for (int i = 0; i < listDados.size(); i++){
+			if(listDados.get(i).isEmpty())
+				i++;
 			String check = funcoes.checkSum(listDados.get(i));
 			if(check.equals("00000")){
 				listaSaida.add(listDados.get(i).concat(check));

@@ -20,13 +20,17 @@ public class LerSalvaArq {
 	String lerArquivo() {
 		String dados = new String();
 		File arquivo = escolherArquivo();
-
+		List<String> dadosArq = new ArrayList<>();
 		try {
 			Scanner sc = new Scanner(arquivo);
 			while (sc.hasNext()) {
-				dados = sc.next();
+				dadosArq.add(sc.next());
 			}
 			sc.close();
+			
+			for(int i=0;i < dadosArq.size();i++){
+				dados=dados.concat(dadosArq.get(i));
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
