@@ -7,9 +7,8 @@ public class DadosPrint {
 	int[][] listaCurvasy;
 	int[] P1, P2, P3, P4;
 	int contador = 0;
-	Boolean passarForma = false;
-	int posicaoCorrida = 0;
-	int contadorCorrida = 0;
+	private int andarX = 0;
+	private int andarY = 0;
 	
 	private DadosPrint() {
 		listaCurvasX = new int[5][100];
@@ -40,17 +39,32 @@ public class DadosPrint {
 	}
 	
 	public void passarObjetoporCaminho(){
-		passarForma = true;
 		 DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
+		 int cont2=0;
+		 int curva=0;
 		for (int i = 0; i < contador*100; i++) {
-			frame2.repaint();
-			posicaoCorrida++;
+			if(cont2 == 99){
+				cont2 = 0;
+				curva++;
+			}
 			
+			andarX = this.listaCurvasX[curva][cont2];
+			andarY = this.listaCurvasy[curva][cont2];
+			frame2.repaint();
+			cont2 ++;
 		}
-		passarForma = false;
-		posicaoCorrida = 0;
-		contadorCorrida = 0;
 		
+		
+	}
+
+	public int receberX() {
+		// TODO Auto-generated method stub
+		return this.andarX;
+	}
+
+	public int receberY() {
+		// TODO Auto-generated method stub
+		return this.andarY ;
 	}
 
 }

@@ -47,13 +47,9 @@ public class DesenhoCurvas extends JFrame {
 		//g.drawLine(dadosPrint.P3[0]-2,dadosPrint.P3[1]-2 , dadosPrint.P3[0]+2, dadosPrint.P3[1]+2);
 		//g.drawLine(dadosPrint.P4[0]-2,dadosPrint.P4[1]-2 , dadosPrint.P4[0]+2, dadosPrint.P4[1]+2);
 		
-		if(dadosPrint.passarForma){
-			if(dadosPrint.posicaoCorrida==99) {
-				dadosPrint.posicaoCorrida=0;
-				dadosPrint.contadorCorrida++;
-			}
-			g.fillOval(dadosPrint.listaCurvasX[dadosPrint.contadorCorrida][dadosPrint.posicaoCorrida],dadosPrint.listaCurvasy[dadosPrint.contadorCorrida][dadosPrint.posicaoCorrida],50,50);
-		}
+
+		g.fillOval(dadosPrint.receberX(),dadosPrint.receberY(),50,50);
+		
 		int[] xlinha= new int[900];
 		int[] ylinha = new int[900];
 		
