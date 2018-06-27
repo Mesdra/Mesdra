@@ -38,23 +38,37 @@ public class DesenhoCurvas extends JFrame {
 		
 		DadosPrint dadosPrint = DadosPrint.getInstance();
 		
-		g.drawPolyline(dadosPrint.listaCurvasX[0], dadosPrint.listaCurvasy[0], 100);
+		for (int i = 0; i < dadosPrint.contador; i++) {
+			g.drawPolyline(dadosPrint.listaCurvasX[i], dadosPrint.listaCurvasy[i], 100);
+		}
+		g.setColor(Color.BLUE);
+		//g.drawLine(dadosPrint.P1[0]-2,dadosPrint.P1[1]-2 , dadosPrint.P1[0]+2, dadosPrint.P1[1]+2);
+		//g.drawLine(dadosPrint.P2[0]-2,dadosPrint.P2[1]-2 , dadosPrint.P2[0]+2, dadosPrint.P2[1]+2);
+		//g.drawLine(dadosPrint.P3[0]-2,dadosPrint.P3[1]-2 , dadosPrint.P3[0]+2, dadosPrint.P3[1]+2);
+		//g.drawLine(dadosPrint.P4[0]-2,dadosPrint.P4[1]-2 , dadosPrint.P4[0]+2, dadosPrint.P4[1]+2);
 		
-		int[] xlinha= new int[500];
-		int[] ylinha = new int[500];
+		if(dadosPrint.passarForma){
+			if(dadosPrint.posicaoCorrida==99) {
+				dadosPrint.posicaoCorrida=0;
+				dadosPrint.contadorCorrida++;
+			}
+			g.fillOval(dadosPrint.listaCurvasX[dadosPrint.contadorCorrida][dadosPrint.posicaoCorrida],dadosPrint.listaCurvasy[dadosPrint.contadorCorrida][dadosPrint.posicaoCorrida],50,50);
+		}
+		int[] xlinha= new int[900];
+		int[] ylinha = new int[900];
 		
-		int[] xcol= new int[500];
-		int[] ycol = new int[500];
+		int[] xcol= new int[900];
+		int[] ycol = new int[900];
 		
-		for (int i = 0; i < 500; i++) {
+		for (int i = 0; i < 900; i++) {
 			xlinha[i] = 200;
 			ylinha[i] = i;
 			xcol[i] = i;
-			ycol[i] = 400;	
+			ycol[i] = 600;	
 		}
 		g.setColor(Color.gray);
-		g.drawPolyline(xlinha, ylinha, 500);
-		g.drawPolyline(xcol, ycol, 500);
+		g.drawPolyline(xlinha, ylinha, 900);
+		g.drawPolyline(xcol, ycol, 900);
 	}
 		
 

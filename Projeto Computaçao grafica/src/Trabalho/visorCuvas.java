@@ -43,6 +43,10 @@ public class visorCuvas extends JFrame {
 	private int[] yT = new int[100];
 	private int[] zT = new int[100];
 	private int X0,Y0,Z0 = 0;
+	private int[] pontoControle1 = new int[3];
+	private int[] pontoControle2 = new int[3];
+	private int[] pontoControle3 = new int[3];
+	private int[] pontoControle4 = new int[3];
 
 	/**
 	 * Launch the application.
@@ -69,12 +73,12 @@ public class visorCuvas extends JFrame {
 				Integer.parseInt(varX3.getText()), Integer.parseInt(varY3.getText()),
 				Integer.parseInt(varZ3.getText()));
 		
-		Dados dados =ajusteDeImpreção(200,400);
+		Dados dados =ajusteDeImpreção(200,600);
 	    DadosPrint listaDados = DadosPrint.getInstance();
-	    listaDados.listaCurvasX[0] = dados.xM;
-	    listaDados.listaCurvasy[0] = dados.yM;
+	    listaDados.addDados(dados.xM, dados.yM,this.pontoControle1 ,this.pontoControle2 ,this.pontoControle3,  this.pontoControle4);
 	    DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
 	    frame2.repaint();
+	    
 	    
 	   
 	}
@@ -83,7 +87,15 @@ public class visorCuvas extends JFrame {
 	public void calculaBezie(int x1, int y1, int z1, int x2, int y2, int z2, int x3, int y3, int z3, int x4, int y4,
 			int z4) {
 		float t = 0;
-
+		int[] dados1 = {x1,y1,z1};
+		int[] dados2 = {x2,y2,z2};
+		int[] dados3 = {x3,y3,z3};
+		int[] dados4 = {x4,y4,z4};
+		pontoControle1 = dados1;
+		pontoControle2 = dados2;
+		pontoControle3 = dados3;
+		pontoControle4 = dados4;
+		
 		for (int i = 0; i < 100; i++) {
 
 			float teste = (float) Math.pow((1 - t), 3);
@@ -117,6 +129,18 @@ public class visorCuvas extends JFrame {
 		int[] x = new int[100];
 		int[] y = new int[100];
 		int[] z = new int[100];
+		
+			pontoControle1[0] += meioX;
+			pontoControle2[0] += meioX;
+			pontoControle3[0] += meioX;
+			pontoControle4[0] += meioX;
+			
+			pontoControle1[1] = -pontoControle1[1] +meioY;
+			pontoControle2[1] = -pontoControle2[1] +meioY;
+			pontoControle3[1] = -pontoControle3[1] +meioY;
+			pontoControle4[1] = -pontoControle4[1] +meioY;
+		
+		
 		
 		for (int i = 0; i < 100; i++) {
 			x[i] = this.xT[i]+meioX;
@@ -192,6 +216,12 @@ public class visorCuvas extends JFrame {
 		contentPane.add(gerarCurva);
 
 		JButton gerarCaminho = new JButton("Gerar Caminho");
+		gerarCaminho.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DadosPrint dados = DadosPrint.getInstance();
+				dados.passarObjetoporCaminho();
+			}
+		});
 		gerarCaminho.setBounds(183, 111, 115, 23);
 		contentPane.add(gerarCaminho);
 
