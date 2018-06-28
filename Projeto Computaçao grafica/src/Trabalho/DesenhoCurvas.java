@@ -39,7 +39,7 @@ public class DesenhoCurvas extends JFrame {
 		DadosPrint dadosPrint = DadosPrint.getInstance();
 		
 		for (int i = 0; i < dadosPrint.contador; i++) {
-			g.drawPolyline(dadosPrint.listaCurvasX[i], dadosPrint.listaCurvasy[i], 100);
+			g.drawPolyline(dadosPrint.listaCurvasXprint[i], dadosPrint.listaCurvasyprint[i], 100);
 		}
 		g.setColor(Color.BLUE);
 		//g.drawLine(dadosPrint.P1[0]-2,dadosPrint.P1[1]-2 , dadosPrint.P1[0]+2, dadosPrint.P1[1]+2);
@@ -66,6 +66,63 @@ public class DesenhoCurvas extends JFrame {
 		g.drawPolyline(xlinha, ylinha, 900);
 		g.drawPolyline(xcol, ycol, 900);
 	}
+
+	public void atualizarTela() {
+		geraRoracao();
+		ajusteDeImpreção(200, 400);
+		this.repaint();
+		
+	}
+	private void ajusteDeImpreção(int meioX, int meioY) {
+		DadosPrint dadosPrint = DadosPrint.getInstance();
+
+		for (int i = 0; i < dadosPrint.contador; i++) {
+			for (int j = 0; j < 100; j++) {
+				
+				dadosPrint.listaCurvasXprint[i][j] = dadosPrint.listaCurvasX[i][j]+meioX;
+				dadosPrint.listaCurvasyprint[i][j] = -dadosPrint.listaCurvasy[i][j]+meioY;
+			
+			}
+
+		}
+
+
+		
+	}
+	
+	private void geraRoracao() {
+		int x = visorCuvas.getGrausdex();
+		int y = visorCuvas.getGrausdey();
+		
+		float ys = (float) Math.sin(Math.PI / 180 * y);
+
+		float yc = (float) Math.cos(Math.PI / 180 * y);
+
+		float xs = (float) Math.sin(Math.PI / 180 * x);
+
+		float xc = (float) Math.cos(Math.PI / 180 * x);
+
+		DadosPrint dadosPrint = DadosPrint.getInstance();
+		int[] resultadosx = new int[100 * dadosPrint.contador];
+		int[] resultadosy = new int[100 * dadosPrint.contador];
+
+		for (int i = 0; i < dadosPrint.contador; i++) {
+
+			for (int j = 0; j < 100; j++) {
+				resultadosx[j] = (int) ((yc * dadosPrint.listaCurvasX[i][j] + yc * dadosPrint.listaCurvasz[i][j]));
+				resultadosy[j] = (int) (((ys * xs) * dadosPrint.listaCurvasX[i][j])
+						+ (xc * dadosPrint.listaCurvasy[i][j]) + ((-yc * xs) * dadosPrint.listaCurvasz[i][j]));
+
+			}
+			dadosPrint.listaCurvasX[i]=resultadosx;
+			dadosPrint.listaCurvasy[i]=resultadosy;
+
+		}
+	}
+	
+	
+
+	
 		
 
 

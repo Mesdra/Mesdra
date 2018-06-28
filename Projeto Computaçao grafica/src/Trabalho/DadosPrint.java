@@ -5,6 +5,9 @@ public class DadosPrint {
 	private static DadosPrint instancia;
 	int[][] listaCurvasX;
 	int[][] listaCurvasy;
+	int[][] listaCurvasXprint;
+	int[][] listaCurvasyprint;
+	int[][] listaCurvasz;
 	int[] P1, P2, P3, P4;
 	int contador = 0;
 	private int andarX = 0;
@@ -13,6 +16,9 @@ public class DadosPrint {
 	private DadosPrint() {
 		listaCurvasX = new int[5][100];
 		listaCurvasy = new int[5][100];
+		listaCurvasz = new int[5][100];
+		listaCurvasXprint = new int[5][100];
+		listaCurvasyprint = new int[5][100];
 		P1 = new int[3];
 		P2 = new int[3];
 		P3 = new int[3];
@@ -28,9 +34,10 @@ public class DadosPrint {
 	}
 
 	
-	public void addDados(int[] x,int[] y,int[] p1,int[] p2,int[] p3,int[] p4){
+	public void addDados(int[] x,int[] y,int[] z,int[] p1,int[] p2,int[] p3,int[] p4){
 		this.listaCurvasX[contador] = x;
 		this.listaCurvasy[contador] = y;
+		this.listaCurvasz[contador] = z;
 		contador++;
 	    P1=p1;
 	    P2=p2;

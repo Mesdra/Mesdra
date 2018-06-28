@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Panel;
 
-
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
@@ -16,17 +15,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class visorCuvas extends JFrame {
-	
-	public class Dados{
-		public Dados(int[] xM,int[] yM,int[] zM){
+
+	public class Dados {
+		public Dados(int[] xM, int[] yM, int[] zM) {
 			this.xM = xM;
 			this.yM = yM;
 			this.zM = zM;
 		}
+
 		int[] xM = new int[100];
 		int[] yM = new int[100];
 		int[] zM = new int[100];
-		
+
 	}
 
 	private JPanel contentPane;
@@ -42,11 +42,14 @@ public class visorCuvas extends JFrame {
 	private int[] xT = new int[100];
 	private int[] yT = new int[100];
 	private int[] zT = new int[100];
-	private int X0,Y0,Z0 = 0;
+	private int X0, Y0, Z0 = 0;
 	private int[] pontoControle1 = new int[3];
 	private int[] pontoControle2 = new int[3];
 	private int[] pontoControle3 = new int[3];
 	private int[] pontoControle4 = new int[3];
+	static private int grausdex = 0;
+	static private int grausdey = 0;
+
 
 	/**
 	 * Launch the application.
@@ -65,37 +68,48 @@ public class visorCuvas extends JFrame {
 			}
 		});
 	}
-	
+
 	protected void geraCurva() {
-		calculaBezie(X0,Y0,Z0,Integer.parseInt(varX1.getText()), Integer.parseInt(varY1.getText()),
-				Integer.parseInt(varZ1.getText()), Integer.parseInt(varX2.getText()),
-				Integer.parseInt(varY2.getText()), Integer.parseInt(varZ2.getText()),
-				Integer.parseInt(varX3.getText()), Integer.parseInt(varY3.getText()),
+		calculaBezie(X0, Y0, Z0, Integer.parseInt(varX1.getText()), Integer.parseInt(varY1.getText()),
+				Integer.parseInt(varZ1.getText()), Integer.parseInt(varX2.getText()), Integer.parseInt(varY2.getText()),
+				Integer.parseInt(varZ2.getText()), Integer.parseInt(varX3.getText()), Integer.parseInt(varY3.getText()),
 				Integer.parseInt(varZ3.getText()));
 		
-		Dados dados =ajusteDeImpreção(200,600);
-	    DadosPrint listaDados = DadosPrint.getInstance();
-	    listaDados.addDados(dados.xM, dados.yM,this.pontoControle1 ,this.pontoControle2 ,this.pontoControle3,  this.pontoControle4);
-	    DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
-	    frame2.repaint();
-	    
-	    
-	   
+		DadosPrint listaDados = DadosPrint.getInstance();
+		listaDados.addDados(xT, yT, zT, this.pontoControle1, this.pontoControle2, this.pontoControle3,
+				this.pontoControle4);
+		DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
+		frame2.atualizarTela();
+		
+
 	}
+
+	
+
+	static public int getGrausdex() {
+		return grausdex;
+	}
+
+
+
+	static public int getGrausdey() {
+		return grausdey;
+	}
+
 	
 
 	public void calculaBezie(int x1, int y1, int z1, int x2, int y2, int z2, int x3, int y3, int z3, int x4, int y4,
 			int z4) {
 		float t = 0;
-		int[] dados1 = {x1,y1,z1};
-		int[] dados2 = {x2,y2,z2};
-		int[] dados3 = {x3,y3,z3};
-		int[] dados4 = {x4,y4,z4};
+		int[] dados1 = { x1, y1, z1 };
+		int[] dados2 = { x2, y2, z2 };
+		int[] dados3 = { x3, y3, z3 };
+		int[] dados4 = { x4, y4, z4 };
 		pontoControle1 = dados1;
 		pontoControle2 = dados2;
 		pontoControle3 = dados3;
 		pontoControle4 = dados4;
-		
+
 		for (int i = 0; i < 100; i++) {
 
 			float teste = (float) Math.pow((1 - t), 3);
@@ -123,34 +137,7 @@ public class visorCuvas extends JFrame {
 		}
 		return soma;
 	}
-	
-	private Dados ajusteDeImpreção(int meioX,int meioY) {
-		
-		int[] x = new int[100];
-		int[] y = new int[100];
-		int[] z = new int[100];
-		
-			pontoControle1[0] += meioX;
-			pontoControle2[0] += meioX;
-			pontoControle3[0] += meioX;
-			pontoControle4[0] += meioX;
-			
-			pontoControle1[1] = -pontoControle1[1] +meioY;
-			pontoControle2[1] = -pontoControle2[1] +meioY;
-			pontoControle3[1] = -pontoControle3[1] +meioY;
-			pontoControle4[1] = -pontoControle4[1] +meioY;
-		
-		
-		
-		for (int i = 0; i < 100; i++) {
-			x[i] = this.xT[i]+meioX;
-			y[i] = -this.yT[i]+meioY;
-			z[i] = this.zT[i];
-		}
-		
-		return new Dados(x,y,z);
-	}
-	
+
 	
 
 	/**
@@ -163,7 +150,6 @@ public class visorCuvas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
 
 		varX1 = new JTextField();
 		varX1.setColumns(10);
@@ -200,17 +186,13 @@ public class visorCuvas extends JFrame {
 		varZ1.setColumns(10);
 		varZ1.setBounds(132, 56, 41, 20);
 		contentPane.add(varZ1);
-		
-
-		
 
 		JButton gerarCurva = new JButton("Gerar Curva ");
 		gerarCurva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					geraCurva();
+				geraCurva();
 			}
 
-			
 		});
 		gerarCurva.setBounds(183, 55, 115, 23);
 		contentPane.add(gerarCurva);
@@ -310,15 +292,17 @@ public class visorCuvas extends JFrame {
 		contentPane.add(Baixo);
 
 		JButton Direita = new JButton(">\r\n");
+		Direita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				grausdex += 10;
+				DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
+				frame2.atualizarTela();
+				
+			}
+		});
 		Direita.setBounds(130, 227, 41, 33);
 		contentPane.add(Direita);
-		
-	  
-		
-		
-		
 
 	}
-
 
 }
