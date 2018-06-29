@@ -54,14 +54,14 @@ public class DadosPrint{
 	
 	
 
-	public int receberX() {
+	public int receberX1() {
 		synchronized (this) {
 			return this.andarX;
 		}
 		
 	}
 
-	public int receberY() {
+	public int receberY1() {
 		synchronized (this) {
 			return this.andarY;
 		}

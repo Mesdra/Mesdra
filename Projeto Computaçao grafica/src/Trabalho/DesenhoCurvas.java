@@ -62,7 +62,7 @@ public class DesenhoCurvas extends JFrame{
 				if (validadorDePassagem) {
 					g.setColor(Color.blue);
 					DadosPrint dados = DadosPrint.getInstance();
-					g.fillOval(dados.receberX(), dados.receberY(), 20, 20);
+					g.fillOval(dados.receberX1(), dados.receberY1(), 20, 20);
 					g.setColor(Color.BLACK);
 					
 				}

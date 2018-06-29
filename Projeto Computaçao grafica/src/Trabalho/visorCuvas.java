@@ -49,6 +49,8 @@ public class visorCuvas extends JFrame {
 	private int[] pontoControle4 = new int[3];
 	static private int grausdex = 0;
 	static private int grausdey = 0;
+	private JTextField textFieldX;
+	private JTextField textFieldY;
 
 
 	/**
@@ -296,6 +298,7 @@ public class visorCuvas extends JFrame {
 					girarX(10); 
 					DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
 					frame2.atualizarTela();
+					atualizaview();
 			}
 		});
 		cima.setBounds(79, 195, 41, 33);
@@ -307,6 +310,7 @@ public class visorCuvas extends JFrame {
 				girary(-10);
 				DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
 				frame2.atualizarTela();
+				atualizaview();
 			}
 		});
 		esquerda.setBounds(28, 227, 41, 33);
@@ -318,6 +322,7 @@ public class visorCuvas extends JFrame {
 				girarX(-10);
 				DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
 				frame2.atualizarTela();
+				atualizaview();
 			}
 		});
 		Baixo.setBounds(79, 259, 41, 33);
@@ -329,13 +334,44 @@ public class visorCuvas extends JFrame {
 				girary(10);
 				DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
 				frame2.atualizarTela();
+				atualizaview();
 				
 			}
 		});
 		Direita.setBounds(130, 227, 41, 33);
 		contentPane.add(Direita);
-
+		
+		textFieldX = new JTextField();
+		textFieldX.setEnabled(false);
+		textFieldX.setBounds(183, 201, 31, 20);
+		contentPane.add(textFieldX);
+		textFieldX.setColumns(10);
+		
+		
+		textFieldY = new JTextField();
+		textFieldY.setEnabled(false);
+		textFieldY.setBounds(183, 233, 31, 20);
+		contentPane.add(textFieldY);
+		textFieldY.setColumns(10);
+		
+		JTextPane txtpnX = new JTextPane();
+		txtpnX.setText("X");
+		txtpnX.setEnabled(false);
+		txtpnX.setEditable(false);
+		txtpnX.setBounds(216, 201, 18, 20);
+		contentPane.add(txtpnX);
+		
+		JTextPane txtpnY = new JTextPane();
+		txtpnY.setText("Y");
+		txtpnY.setEnabled(false);
+		txtpnY.setEditable(false);
+		txtpnY.setBounds(216, 233, 18, 20);
+		contentPane.add(txtpnY);
+		
 	}
-	
-
+	public void atualizaview(){
+		
+		textFieldX.setText(String.valueOf(visorCuvas.grausdex));
+		textFieldY.setText(String.valueOf(visorCuvas.grausdey));
+	}
 }
