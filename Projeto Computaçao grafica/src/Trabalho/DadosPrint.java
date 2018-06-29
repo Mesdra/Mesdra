@@ -1,6 +1,6 @@
 package Trabalho;
 
-public class DadosPrint {
+public class DadosPrint{
 
 	private static DadosPrint instancia;
 	int[][] listaCurvasX;
@@ -8,10 +8,12 @@ public class DadosPrint {
 	int[][] listaCurvasXprint;
 	int[][] listaCurvasyprint;
 	int[][] listaCurvasz;
+	int[][] listaCurvasXrotacionados;
+	int[][] listaCurvasyrotacionados;
 	int[] P1, P2, P3, P4;
 	int contador = 0;
-	private int andarX = 0;
-	private int andarY = 0;
+	int andarX = 0;
+	int andarY = 0;
 	
 	private DadosPrint() {
 		listaCurvasX = new int[5][100];
@@ -19,6 +21,8 @@ public class DadosPrint {
 		listaCurvasz = new int[5][100];
 		listaCurvasXprint = new int[5][100];
 		listaCurvasyprint = new int[5][100];
+		listaCurvasXrotacionados = new int[5][100];
+		listaCurvasyrotacionados = new int[5][100];
 		P1 = new int[3];
 		P2 = new int[3];
 		P3 = new int[3];
@@ -35,6 +39,9 @@ public class DadosPrint {
 
 	
 	public void addDados(int[] x,int[] y,int[] z,int[] p1,int[] p2,int[] p3,int[] p4){
+		if(contador == 1) {
+			System.out.println("c");
+		}
 		this.listaCurvasX[contador] = x;
 		this.listaCurvasy[contador] = y;
 		this.listaCurvasz[contador] = z;
@@ -45,33 +52,32 @@ public class DadosPrint {
 	    P4=p4;
 	}
 	
-	public void passarObjetoporCaminho(){
-		 DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
-		 int cont2=0;
-		 int curva=0;
-		for (int i = 0; i < contador*100; i++) {
-			if(cont2 == 99){
-				cont2 = 0;
-				curva++;
-			}
-			
-			andarX = this.listaCurvasX[curva][cont2];
-			andarY = this.listaCurvasy[curva][cont2];
-			frame2.repaint();
-			cont2 ++;
-		}
-		
-		
-	}
+	
 
 	public int receberX() {
-		// TODO Auto-generated method stub
-		return this.andarX;
+		synchronized (this) {
+			return this.andarX;
+		}
+		
 	}
 
 	public int receberY() {
-		// TODO Auto-generated method stub
-		return this.andarY ;
+		synchronized (this) {
+			return this.andarY;
+		}
+	}
+
+	public void andarX(int i) {
+		synchronized (this) {
+			andarX = i;
+		}
+		
+	}
+
+	public void andarY(int i) {
+		synchronized (this) {
+			andarY = i;
+		}
 	}
 
 }

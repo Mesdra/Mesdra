@@ -109,6 +109,9 @@ public class visorCuvas extends JFrame {
 		pontoControle2 = dados2;
 		pontoControle3 = dados3;
 		pontoControle4 = dados4;
+		this.xT = new int[100];
+		this.yT = new int[100];
+		this.zT = new int[100];
 
 		for (int i = 0; i < 100; i++) {
 
@@ -137,6 +140,13 @@ public class visorCuvas extends JFrame {
 		}
 		return soma;
 	}
+	
+	public void girarX(int valor){
+		grausdex += valor;
+	}
+	public void girary(int valor){
+		grausdey += valor;
+	}
 
 	
 
@@ -155,7 +165,8 @@ public class visorCuvas extends JFrame {
 		varX1.setColumns(10);
 		varX1.setBounds(28, 56, 41, 20);
 		contentPane.add(varX1);
-
+		
+		
 		JTextPane textPane = new JTextPane();
 		textPane.setText("X1");
 		textPane.setEnabled(false);
@@ -200,8 +211,8 @@ public class visorCuvas extends JFrame {
 		JButton gerarCaminho = new JButton("Gerar Caminho");
 		gerarCaminho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DadosPrint dados = DadosPrint.getInstance();
-				dados.passarObjetoporCaminho();
+				DesenhoCurvas desenhos = DesenhoCurvas.getInstance();
+				desenhos.pintarObjetografico();
 			}
 		});
 		gerarCaminho.setBounds(183, 111, 115, 23);
@@ -280,21 +291,42 @@ public class visorCuvas extends JFrame {
 		contentPane.add(textPane_8);
 
 		JButton cima = new JButton("^\r\n");
+		cima.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					girarX(10); 
+					DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
+					frame2.atualizarTela();
+			}
+		});
 		cima.setBounds(79, 195, 41, 33);
 		contentPane.add(cima);
 
 		JButton esquerda = new JButton("<\r\n");
+		esquerda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				girary(-10);
+				DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
+				frame2.atualizarTela();
+			}
+		});
 		esquerda.setBounds(28, 227, 41, 33);
 		contentPane.add(esquerda);
 
 		JButton Baixo = new JButton(" \r\n");
+		Baixo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				girarX(-10);
+				DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
+				frame2.atualizarTela();
+			}
+		});
 		Baixo.setBounds(79, 259, 41, 33);
 		contentPane.add(Baixo);
 
 		JButton Direita = new JButton(">\r\n");
 		Direita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				grausdex += 10;
+				girary(10);
 				DesenhoCurvas frame2 = DesenhoCurvas.getInstance();
 				frame2.atualizarTela();
 				
@@ -304,5 +336,6 @@ public class visorCuvas extends JFrame {
 		contentPane.add(Direita);
 
 	}
+	
 
 }
