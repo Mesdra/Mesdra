@@ -9,7 +9,7 @@ public class separacaoDeDados {
 	public void separaDadosPorVirgula(String dados[]){
 		dadosSeparados = new String[dados.length][];
 		for (int i = 0; i < dados.length; i++) {
-			String[] separacao =dados[i].split(",");
+			String[] separacao =dados[i].split(";");
 			if(separacao.length != 1)
 			dadosSeparados[i] = separacao;
 		}
