@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import Arquivos.LerArq;
 import SqlConect.ConeccaoBancodeDados;
+import TiposFormatos.DadosSantaElena;
 import TiposFormatos.DadosSimepar;
 import TiposFormatos.Formatacao;
 import TratamentoDosDados.separacaoDeDados;
@@ -13,20 +14,19 @@ import TratamentoDosDados.separacaoDeDados;
 public class Main {
 
 	public static void main(String[] args) throws IOException, JSONException {
-		LerArq testeLeitura = new LerArq();
+		LerArq leituras = new LerArq();
 
-		testeLeitura.lerDadosArquivos();
-		separacaoDeDados separacaoDeDados = new separacaoDeDados();
+		leituras.lerDadosArquivos();
+		
+		Formatacao formato = leituras.tratamentoDaMensagem();
 
-		separacaoDeDados.separaDadosPorVirgula(testeLeitura.getDados());
-
-		Formatacao formato = new DadosSimepar(testeLeitura.getQuantDados(), separacaoDeDados.getDadosSeparados());
 		formato.GerarFormato();
 		
 		ConeccaoBancodeDados banco = new ConeccaoBancodeDados();
+	
 		banco.conecPostgre(formato.getDados(),formato.getQuantDados());
 
-		// tratamentoJson.teste();
+		
 	}
 
 }

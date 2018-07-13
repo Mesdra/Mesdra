@@ -5,15 +5,17 @@ import java.util.regex.Pattern;
 public class separacaoDeDados {
 
 	private String[][] dadosSeparados;
-	
-	public void separaDadosPorVirgula(String dados[]){
+
+	public void separaDadosPorVirgula(String dados[]) {
+		int contador = 0;
 		dadosSeparados = new String[dados.length][];
 		for (int i = 0; i < dados.length; i++) {
-			String[] separacao =dados[i].split(";");
-			if(separacao.length != 1)
-			dadosSeparados[i] = separacao;
+			String[] separacao = dados[i].split(",");
+			if (separacao.length != 1) {
+				dadosSeparados[contador++] = separacao;
+			}
 		}
-		
+
 	}
 
 	public separacaoDeDados() {
@@ -25,8 +27,5 @@ public class separacaoDeDados {
 		return dadosSeparados;
 	}
 
-	public void setDadosSeparados(String[][] dadosSeparados) {
-		this.dadosSeparados = dadosSeparados;
-	}
-	
+
 }

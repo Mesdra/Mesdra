@@ -2,7 +2,6 @@ package SqlConect;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -22,7 +21,7 @@ public class ConeccaoBancodeDados {
 			// insert the data
 			// statement.executeUpdate("INSERT INTO dados " + "VALUES
 			// (2455,'nome','2012-06-18','10:34:09','{ \"name\":\"John\" }')");
-			for (int i = 1; i < quantDados; i++)
+			for (int i = 0; i < quantDados; i++)
 				statement.executeUpdate("INSERT INTO dados (id_estacao,nome_estacao,data,hora,sensores,created_at,updated_at)" + "VALUES("
 						+ strings[i][1] + ",'" + strings[i][0] + "','" + strings[i][2] + "','" + strings[i][3] + "','"
 						+ strings[i][4] + "',CURRENT_DATE,CURRENT_DATE)");
