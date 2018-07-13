@@ -24,7 +24,7 @@ public class Main {
 		formato.GerarFormato();
 		
 		ConeccaoBancodeDados banco = new ConeccaoBancodeDados();
-		banco.conecPostgre();
+		banco.conecPostgre(formato.getDados(),formato.getQuantDados());
 
 		// tratamentoJson.teste();
 	}
