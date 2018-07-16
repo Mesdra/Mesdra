@@ -1,6 +1,5 @@
 package TratamentoDosDados;
 
-import java.util.regex.Pattern;
 
 public class separacaoDeDados {
 

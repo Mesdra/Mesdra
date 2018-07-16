@@ -6,10 +6,7 @@ import org.json.JSONException;
 
 import Arquivos.LerArq;
 import SqlConect.ConeccaoBancodeDados;
-import TiposFormatos.DadosSantaElena;
-import TiposFormatos.DadosSimepar;
 import TiposFormatos.Formatacao;
-import TratamentoDosDados.separacaoDeDados;
 
 public class Main {
 

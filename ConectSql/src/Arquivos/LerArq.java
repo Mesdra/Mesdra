@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import TiposFormatos.DadosSantaElena;
 import TiposFormatos.DadosSimepar;
+import TiposFormatos.DadosSoloVivo3;
+import TiposFormatos.DadosSoloVivo6;
 import TiposFormatos.Formatacao;
 
 public class LerArq {
@@ -68,30 +70,31 @@ public class LerArq {
 		final String[] separacao = dados[0].split(";");
 		if (separacao.length != 1) {
 			String[][] dadosSeparados = new String[quantDados][];
-			for (int i = 0; i < dados.length; i++) {
-				String[] separacao1 = dados[i].split(",");
+			for (int i = 0; i < this.dados.length; i++) {
+				String[] separacaoSimepar = dados[i].replaceAll("\"", " ").split(";");
 
-				dadosSeparados[i] = separacao1;
+				dadosSeparados[i] = separacaoSimepar;
 
 			}
 			return new DadosSimepar(quantDados, dadosSeparados);
-		}
-		// continuar desenvolvento as condicoes fazer o teste do formato sinepar e gerar
-		// as condicoes para os tipos de estacoes dentro do segundo if
-		if (dados[1] == " ") {
+		} else {
 			this.quantDados = quantDados / 2;
 			int contador = 0;
-			String[][] dadosSeparados = new String[quantDados][];
-			for (int i = 0; i < dados.length; i++) {
-				String[] separacao1 = dados[i].split(",");
-				if (separacao1.length != 1) {
-					dadosSeparados[contador++] = separacao1;
+			String[][] dadoSeparadsEstacoes = new String[quantDados][];
+			for (int i = 0; i < this.dados.length; i++) {
+				String[] dadosSantaElena = dados[i].replaceAll("\"", "").split(",");
+				if (dadosSantaElena.length != 1) {
+					dadoSeparadsEstacoes[contador++] = dadosSantaElena;
 				}
 			}
-			// dadosSeparados;
-			return new DadosSantaElena(quantDados, dadosSeparados);
-		}
+			if (dadoSeparadsEstacoes[0][2].equals("SH01"))
+				return new DadosSantaElena(quantDados, dadoSeparadsEstacoes);
+			if (dadoSeparadsEstacoes[0][2].equals("SVTOL03"))
+				return new DadosSoloVivo3(quantDados, dadoSeparadsEstacoes);
+			if (dadoSeparadsEstacoes[0][2].equals("SVTOL06"))
+				return new DadosSoloVivo6(quantDados, dadoSeparadsEstacoes);
 
-		return null;
+			return null;
+		}
 	}
 }

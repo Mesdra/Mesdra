@@ -14,8 +14,8 @@ public class DadosSantaElena extends Formatacao{
 			form[i][0] = dados[i][2];
 			form[i][1] = dados[i][0];
 			String datahora[] = dados[i][1].split(" ");
-			form[i][2] = datahora[0].substring(1, datahora[0].length());
-			form[i][3] = datahora[1].substring(0, datahora[1].length()-1);
+			form[i][2] = datahora[0];
+			form[i][3] = datahora[1];
 
 			try {
 				JSONObject jsonObj = new JSONObject();
