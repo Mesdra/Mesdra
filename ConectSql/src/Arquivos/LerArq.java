@@ -15,12 +15,12 @@ public class LerArq {
 	private String[] dados;
 	private int quantDados;
 
-	public void lerDadosArquivos() throws IOException {
+	public void lerDadosArquivos(String string) throws IOException {
 
 		BufferedReader br;
 		try {
 			br = new BufferedReader(
-					new FileReader("C:\\Users\\vini\\Desktop\\Estagio\\dadosLeituraSensores\\SIMEPAR-2018-07-08.txt"));
+					new FileReader("C:\\Users\\vini\\Desktop\\Estagio\\dadosLeituraSensores\\" + string));
 
 			int lines = 0;
 			while (br.readLine() != null)
@@ -28,7 +28,7 @@ public class LerArq {
 			br.close();
 			quantDados = lines;
 			br = new BufferedReader(
-					new FileReader("C:\\Users\\vini\\Desktop\\Estagio\\dadosLeituraSensores\\SIMEPAR-2018-07-08.txt"));
+					new FileReader("C:\\Users\\vini\\Desktop\\Estagio\\dadosLeituraSensores\\" + string));
 			int i = 0;
 			dados = new String[lines];
 			while (br.ready()) {
