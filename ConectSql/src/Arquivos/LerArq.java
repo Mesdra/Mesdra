@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import TiposFormatos.DadosIapar;
 import TiposFormatos.DadosSantaElena;
 import TiposFormatos.DadosSimepar;
 import TiposFormatos.DadosSoloVivo3;
@@ -67,17 +68,29 @@ public class LerArq {
 
 	public Formatacao tratamentoDaMensagem() {
 
-		final String[] separacao = dados[0].split(";");
+		String[] separacao = dados[0].split(";");
 		if (separacao.length != 1) {
 			String[][] dadosSeparados = new String[quantDados][];
 			for (int i = 0; i < this.dados.length; i++) {
-				String[] separacaoSimepar = dados[i].replaceAll("\"", " ").split(";");
+				String[] separacaoSimepar = dados[i].replaceAll("\"", "").split(";");
 
 				dadosSeparados[i] = separacaoSimepar;
 
 			}
 			return new DadosSimepar(quantDados, dadosSeparados);
-		} else {
+		} else{
+			separacao = dados[0].split(",");
+			if(separacao[0].equals("\"TOA5\"")) {
+				String[][] dadosSeparados = new String[quantDados][];
+				for (int i = 0; i < this.dados.length; i++) {
+					String[] separacaoSimepar = dados[i].replaceAll("\"", "").split(",");
+
+					dadosSeparados[i] = separacaoSimepar;
+
+				}	
+				return new DadosIapar(quantDados,dadosSeparados);
+			}
+			
 			this.quantDados = quantDados / 2;
 			int contador = 0;
 			String[][] dadoSeparadsEstacoes = new String[quantDados][];

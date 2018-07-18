@@ -9,17 +9,18 @@ public class DadosSimepar extends Formatacao {
 
 	@Override
 	public void GerarFormato() {
-		String[][] form = new String[getQuantDados()][5];
+		String[][] form = new String[getQuantDados()][6];
 		String dados[][] = getDados().clone();
 		for (int i = 0; i < getQuantDados(); i++) {
-
-			form[i][0] = "Simepar";
-			form[i][1] = dados[i][0];
+			
+			form[i][0] =  Integer.toString("Simepar".hashCode());
+			form[i][1] = "Simepar";
+			form[i][2] = dados[i][0];
 			String datahora[] = dados[i][1].split(" ");
 			String data[] = datahora[1].split("/");
 			String dataForm = data[2].concat("-").concat(data[1].concat("-").concat(data[0]));
-			form[i][2] = dataForm;
-			form[i][3] = datahora[2].concat(":00");
+			form[i][3] = dataForm;
+			form[i][4] = datahora[2].concat(":00");
 
 			try {
 				JSONObject jsonObj = new JSONObject();
@@ -38,7 +39,7 @@ public class DadosSimepar extends Formatacao {
 				jsonObj.put("chuva", dados[i][13]);
 				jsonObj.put("chuvaAc", dados[i][14]);
 
-				form[i][4] = jsonObj.toString();
+				form[i][5] = jsonObj.toString();
 
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

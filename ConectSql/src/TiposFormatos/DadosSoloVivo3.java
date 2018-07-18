@@ -12,15 +12,15 @@ public class DadosSoloVivo3 extends Formatacao {
 
 	@Override
 	public void GerarFormato() {
-		String[][] form = new String[getQuantDados()][5];
+		String[][] form = new String[getQuantDados()][6];
 		String dados[][] = getDados().clone();
 		for (int i = 0; i < getQuantDados(); i++) {
-
-			form[i][0] = dados[i][2];
-			form[i][1] = dados[i][0];
+			form[i][0] =  Integer.toString(dados[i][2].hashCode());
+			form[i][1] = dados[i][2];
+			form[i][2] = dados[i][0];
 			String datahora[] = dados[i][1].split(" ");
-			form[i][2] = datahora[0];
-			form[i][3] = datahora[1];
+			form[i][3] = datahora[0];
+			form[i][4] = datahora[1];
 
 			try {
 				JSONObject jsonObj = new JSONObject();
@@ -48,7 +48,7 @@ public class DadosSoloVivo3 extends Formatacao {
 				jsonObj.put("cma6_alb", dados[i][23]);
 				
 
-				form[i][4] = jsonObj.toString();
+				form[i][5] = jsonObj.toString();
 
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

@@ -16,6 +16,8 @@ public class Main {
 		final File folder = new File("C:\\Users\\vini\\Desktop\\Estagio\\dadosLeituraSensores");
 		
 		 for (final File fileEntry : folder.listFiles()) {
+			 
+			 
 		      
 			 LerArq leituras = new LerArq();
 
