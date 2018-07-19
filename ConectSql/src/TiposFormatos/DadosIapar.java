@@ -12,6 +12,7 @@ public class DadosIapar extends Formatacao {
 
 	@Override
 	public void GerarFormato() {
+		setQuantDados(getQuantDados()-4);
 		String[][] form = new String[getQuantDados()][6];
 		String dados[][] = getDados().clone();
 		int contador = 0;
