@@ -2,7 +2,7 @@ package FTPConectFormatos;
 
 import org.apache.commons.net.ftp.FTPClient;
 
-public abstract class RequisiçãoDeArquivos {
+public abstract class RequisicaoDeArquivos {
 	
 	private String caminhoRemoto;
 	private FTPClient conecFtp;
@@ -13,10 +13,10 @@ public abstract class RequisiçãoDeArquivos {
 	public void setConecFtp(FTPClient conecFtp) {
 		this.conecFtp = conecFtp;
 	}
-	public RequisiçãoDeArquivos(String caminho) {
+	public RequisicaoDeArquivos(String caminho) {
 		caminhoRemoto = caminho;
 	}
-	public RequisiçãoDeArquivos() {
+	public RequisicaoDeArquivos() {
 		super();
 	}
 
@@ -30,5 +30,5 @@ public abstract class RequisiçãoDeArquivos {
 		this.caminhoRemoto = caminhoRemoto;
 	}
 	//baixa os arquivos remotos (FTP) e colocatodos os dados em uma lista 
-	public abstract java.util.List<String> recebeArquivos();
+	public abstract String recebeArquivos();
 }

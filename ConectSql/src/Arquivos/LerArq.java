@@ -16,12 +16,12 @@ public class LerArq {
 	private String[] dados;
 	private int quantDados;
 
-	public void lerDadosArquivos(String string) throws IOException {
+	public void lerDadosArquivos(String string, String caminhoDiretorio) throws IOException {
 
 		BufferedReader br;
 		try {
 			br = new BufferedReader(
-					new FileReader("/home/vinicius/Documentos/leituras/" + string));
+					new FileReader(caminhoDiretorio+"/"+ string));
 
 			int lines = 0;
 			while (br.readLine() != null)
@@ -29,7 +29,7 @@ public class LerArq {
 			br.close();
 			quantDados = lines;
 			br = new BufferedReader(
-					new FileReader("/home/vinicius/Documentos/leituras/" + string));
+					new FileReader(caminhoDiretorio+"/"+ string));
 			int i = 0;
 			dados = new String[lines];
 			while (br.ready()) {
@@ -110,4 +110,6 @@ public class LerArq {
 			return null;
 		}
 	}
+
+
 }

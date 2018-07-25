@@ -11,7 +11,7 @@ public class ConeccaoBancodeDados {
 
 	public void conecPostgre(String[][] strings, int quantDados) {
 		try {
-			String fonte = "jdbc:postgresql://192.168.0.105:5432/mycontroller";
+			String fonte = "jdbc:postgresql://192.168.0.108:5432/mycontroller";
 			String usuario = "postgres";
 			String senha = "sIIsthUlsO";
 			Class.forName("org.postgresql.Driver");

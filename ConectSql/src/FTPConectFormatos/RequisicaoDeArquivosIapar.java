@@ -1,57 +1,72 @@
 package FTPConectFormatos;
 
-import java.awt.List;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.OutputStream;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
-public class RequisiçãoDeArquivosSimepar extends RequisiçãoDeArquivos {
 
-	public RequisiçãoDeArquivosSimepar(String caminho) {
+public class RequisicaoDeArquivosIapar extends RequisicaoDeArquivos {
+
+	public RequisicaoDeArquivosIapar(String caminho) {
 		super(caminho);
 		// TODO Auto-generated constructor stub
 	}
 
-	public RequisiçãoDeArquivosSimepar() {
+	public RequisicaoDeArquivosIapar() {
 		super();
 	}
 
-	public java.util.List<String> recebeArquivos() {
-		List lista = new List();
-		FTPClient ftpClient = this.getConecFtp();
-		
-		try {
-			// problemas com o retrive File Stream, pois so o primeira requisicao retorna um arquivo valido.
-			FTPFile[] files1 = ftpClient.listFiles(this.getCaminhoRemoto());
-			for (int i = 0; i < files1.length; i++) {
-				final String caminho = this.getCaminhoRemoto() + "/" + files1[i].getName();
-				InputStream dados = ftpClient.retrieveFileStream(caminho);
+	public String recebeArquivos() {
 
-				try (Scanner scanner = new Scanner(dados)) {
-					while (scanner.hasNextLine()) {
-						String line = scanner.nextLine();
-						lista.add(line);
-					}
+		FTPClient ftpClient = this.getConecFtp();
+
+		int reply = ftpClient.getReplyCode();
+		// FTPReply stores a set of constants for FTP reply codes.
+		if (!FTPReply.isPositiveCompletion(reply)) {
+			try {
+				ftpClient.disconnect();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		ftpClient.enterLocalPassiveMode();
+		String caminhoDiretorio = "erro ao criar caminho"; 
+		try {
+			ftpClient.changeWorkingDirectory(this.getCaminhoRemoto());
+			FTPFile[] files1 = ftpClient.listFiles();
+			caminhoDiretorio = "/home/vinicius/Documentos/Teste/" + files1[0].getName();
+			Boolean aqr = new File(caminhoDiretorio).mkdir();
+			if (aqr) {
+				for (int i = 0; i < files1.length; i++) {
+					OutputStream output;
+					output = new FileOutputStream(caminhoDiretorio+ "/"+ files1[i].getName());
+					ftpClient.retrieveFile(files1[i].getName(), output);
+
 				}
+			} else {
+				System.out.println("erro ao criar arquivo");
 			}
 			// Finaliza coneccao com o FTP
 			if (ftpClient.isConnected()) {
 				ftpClient.logout();
 				ftpClient.disconnect();
 			}
-			return (java.util.List<String>) lista;
+
+			return caminhoDiretorio;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("falhar ao abrir o arquivo para scannear os dados");
 			e.printStackTrace();
 		}
 
-		return null;
+		return caminhoDiretorio ;
 	}
 
 	public static void showServerReply(FTPClient ftpClient) {
@@ -71,10 +86,9 @@ public class RequisiçãoDeArquivosSimepar extends RequisiçãoDeArquivos {
 		String pass = "d1dea0ad729";
 
 		FTPClient ftpClient = new FTPClient();
-		
 
 		try {
-			
+
 			ftpClient.connect(server, port);
 			showServerReply(ftpClient);
 

@@ -5,8 +5,9 @@ import java.io.IOException;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
-import FTPConectFormatos.RequisiçãoDeArquivos;
-import FTPConectFormatos.RequisiçãoDeArquivosSimepar;
+import FTPConectFormatos.RequisicaoDeArquivosSantaElena;
+import FTPConectFormatos.RequisicaoDeArquivos;
+import FTPConectFormatos.RequisicaoDeArquivosIapar;
 
 public class CaminhoRemoto {
 	private String[] ultimasLeituras;
@@ -26,11 +27,13 @@ public class CaminhoRemoto {
 
 // cria o cliente e o caminho utilizado para realizar as leituras corretas, 
 //	utilizando o parametro para identificar qual a estacao que esta sendo trabalhada
-	public RequisiçãoDeArquivos buscarNovaLeitura(String estacao) {
+	public RequisicaoDeArquivos buscarNovaLeitura(String estacao) {
 		// coneccao com FTP simepar
-		if (estacao.equals("simepar")) {
-			RequisiçãoDeArquivos dados = new RequisiçãoDeArquivosSimepar();
-			
+
+		switch (estacao) {
+		case "IAPAR":
+			RequisicaoDeArquivos dados = new RequisicaoDeArquivosIapar();
+
 			FTPClient ftpClient = dados.criaConecao();
 
 			try {
@@ -50,11 +53,13 @@ public class CaminhoRemoto {
 				e.printStackTrace();
 			}
 
+			break;
+
+		case "SH01":
+			RequisicaoDeArquivos dados1 = new RequisicaoDeArquivosSantaElena();
+			return null;
 		}
-		// ha fazer
-		if(estacao.equals("SLV3")){
-			
-		}
+
 		return null;
 	}
 
