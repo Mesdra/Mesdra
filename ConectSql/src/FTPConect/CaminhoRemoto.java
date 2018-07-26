@@ -56,7 +56,7 @@ public class CaminhoRemoto {
 			break;
 
 		case "SH01":
-			RequisicaoDeArquivos dados1 = new RequisicaoDeArquivosSantaElena();
+			
 			return null;
 		}
 
